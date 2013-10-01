@@ -1,0 +1,121 @@
+wrote geosynopticsql.html
+/W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module geosynopticsql</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>geosynopticsql</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/pawel/workspace/geosynoptic/trunk/geosynopticsql.py">/home/pawel/workspace/geosynoptic/trunk/geosynopticsql.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="argparse.html">argparse</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="MySQLdb.html">MySQLdb</a><br>
+</td><td width="25%" valign=top><a href="subprocess.html">subprocess</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="geosynoptic.html#Geosynoptic">geosynoptic.Geosynoptic</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="geosynopticsql.html#GeosynopticSQL">GeosynopticSQL</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GeosynopticSQL">class <strong>GeosynopticSQL</strong></a>(<a href="geosynoptic.html#Geosynoptic">geosynoptic.Geosynoptic</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="geosynopticsql.html#GeosynopticSQL">GeosynopticSQL</a></dd>
+<dd><a href="geosynoptic.html#Geosynoptic">geosynoptic.Geosynoptic</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GeosynopticSQL-__init__"><strong>__init__</strong></a>(self, host<font color="#909090">='localhost'</font>, port<font color="#909090">=10000</font>, user<font color="#909090">='root'</font>, passwd<font color="#909090">=''</font>, db<font color="#909090">='tango'</font>)</dt></dl>
+
+<dl><dt><a name="GeosynopticSQL-get_device_list"><strong>get_device_list</strong></a>(self, device_pattern)</dt><dd><tt>Function&nbsp;retrieves&nbsp;devices&nbsp;to&nbsp;which&nbsp;device_pattern&nbsp;applies.&nbsp;Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;devices<br>
+&nbsp;<br>
+:param&nbsp;host:&nbsp;database&nbsp;host<br>
+:type&nbsp;&nbsp;host:&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+:param&nbsp;port:&nbsp;database&nbsp;port<br>
+:type&nbsp;&nbsp;port:&nbsp;integer<br>
+&nbsp;<br>
+:param&nbsp;user:&nbsp;database&nbsp;user<br>
+:type&nbsp;&nbsp;user:&nbsp;string&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+:param&nbsp;passwd:&nbsp;database&nbsp;host<br>
+:type&nbsp;&nbsp;passwd:&nbsp;string<br>
+&nbsp;<br>
+:param&nbsp;device_pattern:&nbsp;server&nbsp;name&nbsp;pattern&nbsp;(*&nbsp;available)<br>
+:type&nbsp;&nbsp;device_pattern:&nbsp;string<br>
+&nbsp;<br>
+:return:&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;devices<br>
+:rtype:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;strings&nbsp;in&nbsp;format&nbsp;of&nbsp;x/y/z</tt></dd></dl>
+
+<dl><dt><a name="GeosynopticSQL-get_device_properties"><strong>get_device_properties</strong></a>(self, device_pattern, filter_properties)</dt><dd><tt>Function&nbsp;retrieves&nbsp;properties&nbsp;of&nbsp;devices&nbsp;consistent&nbsp;with&nbsp;device_pattern<br>
+&nbsp;<br>
+:param&nbsp;device_pattern:&nbsp;server&nbsp;name&nbsp;pattern&nbsp;(*&nbsp;available)<br>
+:type&nbsp;&nbsp;device_pattern:&nbsp;string<br>
+&nbsp;<br>
+:param&nbsp;filter_properties:&nbsp;list&nbsp;of&nbsp;properties<br>
+:type&nbsp;&nbsp;filter_properties:&nbsp;list<br>
+&nbsp;<br>
+:return:&nbsp;&nbsp;&nbsp;&nbsp;dictionary&nbsp;with&nbsp;devices&nbsp;as&nbsp;keys&nbsp;and&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(property,&nbsp;value)<br>
+:rtype:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dict</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset([])</dl>
+
+<hr>
+Data descriptors inherited from <a href="geosynoptic.html#Geosynoptic">geosynoptic.Geosynoptic</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="geosynoptic.html#Geosynoptic">geosynoptic.Geosynoptic</a>:<br>
+<dl><dt><strong>__metaclass__</strong> = &lt;class 'abc.ABCMeta'&gt;<dd><tt>Metaclass&nbsp;for&nbsp;defining&nbsp;Abstract&nbsp;Base&nbsp;Classes&nbsp;(ABCs).<br>
+&nbsp;<br>
+Use&nbsp;this&nbsp;metaclass&nbsp;to&nbsp;create&nbsp;an&nbsp;ABC.&nbsp;&nbsp;An&nbsp;ABC&nbsp;can&nbsp;be&nbsp;subclassed<br>
+directly,&nbsp;and&nbsp;then&nbsp;acts&nbsp;as&nbsp;a&nbsp;mix-in&nbsp;class.&nbsp;&nbsp;You&nbsp;can&nbsp;also&nbsp;register<br>
+unrelated&nbsp;concrete&nbsp;classes&nbsp;(even&nbsp;built-in&nbsp;classes)&nbsp;and&nbsp;unrelated<br>
+ABCs&nbsp;as&nbsp;'virtual&nbsp;subclasses'&nbsp;--&nbsp;these&nbsp;and&nbsp;their&nbsp;descendants&nbsp;will<br>
+be&nbsp;considered&nbsp;subclasses&nbsp;of&nbsp;the&nbsp;registering&nbsp;ABC&nbsp;by&nbsp;the&nbsp;built-in<br>
+issubclass()&nbsp;function,&nbsp;but&nbsp;the&nbsp;registering&nbsp;ABC&nbsp;won't&nbsp;show&nbsp;up&nbsp;in<br>
+their&nbsp;MRO&nbsp;(Method&nbsp;Resolution&nbsp;Order)&nbsp;nor&nbsp;will&nbsp;method<br>
+implementations&nbsp;defined&nbsp;by&nbsp;the&nbsp;registering&nbsp;ABC&nbsp;be&nbsp;callable&nbsp;(not<br>
+even&nbsp;via&nbsp;super()).</tt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-trigger_taurus_form"><strong>trigger_taurus_form</strong></a>(device_list)</dt></dl>
+</td></tr></table>
+</body></html>

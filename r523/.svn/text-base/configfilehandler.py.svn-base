@@ -1,0 +1,57 @@
+import os
+from lxml import etree
+
+
+class InvalidPathException(Exception):
+    pass
+
+
+class ConfigFileHandler(object):
+    def __init__(self, configFilePath='config.xml'):
+        """
+        Creates configFile under specified path if one does not exist
+        Creates lxml.etree structure for handling config info
+        """
+        self.configFilePath = configFilePath
+        self.configFileName = os.path.basename(self.configFilePath)
+
+        if not os.path.isfile(self.configFilePath):
+            try:
+                print "config.xml was not found and it's being created..."
+                #creates new default config
+                self.root = etree.Element("config")
+                self.root.append(etree.Element("selectedDevices"))
+                defaultIconPath = etree.SubElement(self.root, "defaultIconPath")
+                defaultIconPath.text =  os.path.join(os.path.dirname(__file__), 'resource/icons/default.png')
+                self.root.append(etree.Element("group"))
+                
+                self._saveConfigToFile()
+            
+            except OSError:
+                print 'Error: Config file was not created'
+
+        else:
+            print "config.xml was found!"
+            try:
+                self.root = etree.parse(self.configFilePath).getroot()
+                print etree.tostring(self.root, pretty_print=True)
+            except etree.XMLSyntaxError:
+                print "%s is not valid xml file" % self.configFileName
+        
+
+    def getDefaultIconPath(self):
+        for element in self.root.iter():
+            if element.tag == 'defaultIconPath':
+                return element.text
+
+    def _saveConfigToFile(self):
+        """
+        Writes the xml structure of xml tree to configFilePath
+        """
+        with open(self.configFileName, 'w') as configFile:
+            print etree.tostring(self.root, pretty_print=True)
+            configFile.write(etree.tostring(self.root, pretty_print=True))
+        configFile.close()
+
+if __name__ == '__main__':
+    c = ConfigFileHandler()

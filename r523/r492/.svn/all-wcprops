@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492
+END
+geosynoptictango.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492/geosynoptictango.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492/__init__.py
+END
+add_proper.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492/add_proper.py
+END
+geosynoptic.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492/geosynoptic.py
+END
+geosynopticsql.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492/geosynopticsql.py
+END
+main.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492/main.py
+END
+panel.ui
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492/panel.ui
+END
+update_db.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r523/r492/update_db.py
+END

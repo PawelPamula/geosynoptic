@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r492/test
+END
+test_geosynoptictango.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r492/test/test_geosynoptictango.py
+END
+test_add_proper.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r492/test/test_add_proper.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r492/test/__init__.py
+END
+.coverage
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r492/test/.coverage
+END
+test_geosynopticsql.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r492/test/test_geosynopticsql.py
+END
+test_main.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/projects/!svn/ver/135/geosynoptic/branches/devel-refactored/r492/test/test_main.py
+END

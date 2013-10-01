@@ -1,0 +1,55 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'step3.ui'
+#
+# Created: Mon Sep  9 08:33:55 2013
+#      by: PyQt4 UI code generator 4.8.3
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
+class Ui_Step3(QtGui.QWidget):
+    def __init__(self, parent):
+        super(Ui_Step3, self).__init__()
+        
+        self.resize(640, 480)
+        self.pushButton = QtGui.QPushButton(self)
+        self.pushButton.setGeometry(QtCore.QRect(190, 160, 31, 27))
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.scrollArea = QtGui.QScrollArea(self)
+        self.scrollArea.setGeometry(QtCore.QRect(10, 10, 171, 333))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
+        self.scrollAreaWidgetContents = QtGui.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 169, 329))
+        self.scrollAreaWidgetContents.setObjectName(_fromUtf8("scrollAreaWidgetContents"))
+        self.listWidget = QtGui.QListWidget(self.scrollAreaWidgetContents)
+        self.listWidget.setGeometry(QtCore.QRect(0, 0, 171, 331))
+        self.listWidget.setObjectName(_fromUtf8("listWidget"))
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.comboBox = QtGui.QComboBox(self)
+        self.comboBox.setGeometry(QtCore.QRect(230, 10, 151, 27))
+        self.comboBox.setObjectName(_fromUtf8("comboBox"))
+        self.widget = QtGui.QWidget(self)
+        self.widget.setGeometry(QtCore.QRect(230, 50, 151, 251))
+        self.widget.setObjectName(_fromUtf8("widget"))
+        self.listWidget_2 = QtGui.QListWidget(self.widget)
+        self.listWidget_2.setGeometry(QtCore.QRect(0, 0, 151, 211))
+        self.listWidget_2.setObjectName(_fromUtf8("listWidget_2"))
+        self.pushButton_2 = QtGui.QPushButton(self)
+        self.pushButton_2.setGeometry(QtCore.QRect(230, 270, 151, 31))
+        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.pushButton_3 = QtGui.QPushButton(self)
+        self.pushButton_3.setGeometry(QtCore.QRect(230, 310, 151, 31))
+        self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
+        
+        self.pushButton.setText('>')
+        self.pushButton_2.setText('Clear')
+        self.pushButton_3.setText('Add group')
+

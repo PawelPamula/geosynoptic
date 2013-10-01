@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+
+import sys
+from geosynoptictango import GeosynopticTango
+from step3 import Ui_Step3
+from PyQt4 import QtCore, QtGui
+
+
+class Step3Widget(QtGui.QWidget):
+    def __init__(self):
+        super(Step3Widget, self).__init__()
+
+        self.gtango = GeosynopticTango()
+
+        self.resize(640, 480)
+        self.layout = QtGui.QHBoxLayout()
+        self.mainWidget = Ui_Step3(self)
+        self.layout.addWidget(self.mainWidget)
+        self.setLayout(self.layout)
+
+        self.show_devices_in_list_view()
+        self.populate_combo_box()
+
+        #Signals
+        self.connect(self.mainWidget.pushButton, QtCore.SIGNAL('clicked()'), self.on_add_device_clicked)
+        self.connect(self.mainWidget.pushButton_2, QtCore.SIGNAL('clicked()'), self.on_clear_clicked)
+
+        self.show()
+
+    def show_devices_in_list_view(self):
+        output = self.gtango.get_device_list('*/*/*')
+        qStringOutput = [QtCore.QString(i) for i in output]
+        self.mainWidget.listWidget.addItems(qStringOutput)
+
+    def on_add_device_clicked(self):
+        current_item = self.mainWidget.listWidget.currentItem()
+        if current_item:
+            self.mainWidget.listWidget_2.addItem(QtCore.QString(current_item.text()))
+
+    def on_clear_clicked(self):
+        while(self.mainWidget.listWidget_2.count()>0):
+            self.mainWidget.listWidget_2.takeItem(0)
+
+    def on_add_group_clicked(self):
+        pass
+
+    def populate_combo_box(self):
+        #import problem - to resolve
+        self.mainWidget.comboBox.addItems('1 2 3 4 5 6 7'.split())
+
+def main():
+    app = QtGui.QApplication(sys.argv)
+    w = Step3Widget()
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
+
+
