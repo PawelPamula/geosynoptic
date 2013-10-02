@@ -68,6 +68,55 @@ class Ui_Step3(QtGui.QWidget):
         self.listWidget_3 = QtGui.QListWidget(self.widget_2)
         self.listWidget_3.setGeometry(QtCore.QRect(0, 0, 171, 201))
         self.listWidget_3.setObjectName(_fromUtf8("listWidget_3"))
+
+        self.listWidget.setStyleSheet("""QListWidget:item:selected:active {
+                                            background: blue;
+                                         }
+                                         QListWidget:item:selected:!active {
+                                            background: gray;
+                                         }
+                                         QListWidget:item:selected:disabled {
+                                            background: gray;
+                                         }
+                                         QListWidget:item:selected:!disabled {
+                                            background: blue;
+                                         }
+                                       """
+                                     )
+
+        self.listWidget_2.setStyleSheet("""QListWidget:item:selected:active {
+                                            background: blue;
+                                         }
+                                         QListWidget:item:selected:!active {
+                                            background: gray;
+                                         }
+                                         QListWidget:item:selected:disabled {
+                                            background: gray;
+                                         }
+                                         QListWidget:item:selected:!disabled {
+                                            background: blue;
+                                         }
+                                       """
+                                     )
+
+        self.listWidget_3.setStyleSheet("""QListWidget:item:selected:active {
+                                            background: blue;
+                                         }
+                                         QListWidget:item:selected:!active {
+                                            background: gray;
+                                         }
+                                         QListWidget:item:selected:disabled {
+                                            background: gray;
+                                         }
+                                         QListWidget:item:selected:!disabled {
+                                            background: blue;
+                                         }
+                                         QListWidget {
+                                            background: lightgray;
+                                         }
+                                       """
+                                     )
+
         self.label_2 = QtGui.QLabel(self)
         self.label_2.setGeometry(QtCore.QRect(30, 10, 121, 31))
         self.label_2.setObjectName(_fromUtf8("label_2"))

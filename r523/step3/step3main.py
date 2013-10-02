@@ -22,13 +22,18 @@ class Step3Widget(QtGui.QWidget):
         self.layout.addWidget(self.mainWidget)
         self.setLayout(self.layout)
 
+        self.mainWidget.listWidget_3.setEnabled(False)
+        self.mainWidget.pushButton_7.setEnabled(False)
+        self.mainWidget.pushButton_8.setEnabled(False)
         self.show_devices_in_list_view()
-        self.show_groups()
+        self.show_groups_in_combo()
+
         #Signals
         self.connect(self.mainWidget.pushButton, QtCore.SIGNAL('clicked()'), self.on_add_device_clicked)
         self.connect(self.mainWidget.pushButton_2, QtCore.SIGNAL('clicked()'), self.on_add_group_clicked)
-        self.connect(self.mainWidget.pushButton_4, QtCore.SIGNAL('clicked()'), self.confighandler.printConfig)
+        self.connect(self.mainWidget.pushButton_4, QtCore.SIGNAL('clicked()'), self.on_remove_highlighted_device_clicked)
         self.connect(self.mainWidget.pushButton_3, QtCore.SIGNAL('clicked()'), self.on_add_group)
+        self.connect(self.mainWidget.pushButton_5, QtCore.SIGNAL('clicked()'), self.on_clear_list_clicked)
         self.connect(self.mainWidget.pushButton_6, QtCore.SIGNAL('clicked()'), self.on_edit_group_clicked)
 
         self.show()
@@ -38,7 +43,7 @@ class Step3Widget(QtGui.QWidget):
         qStringOutput = [QtCore.QString(i) for i in output]
         self.mainWidget.listWidget.addItems(qStringOutput)
 
-    def show_groups(self):
+    def show_groups_in_combo(self):
         self.mainWidget.comboBox.clear()
         groups = self.confighandler.getGroups()
         groups = [QtCore.QString(s) for s in groups]
@@ -52,26 +57,40 @@ class Step3Widget(QtGui.QWidget):
                                buttonText='Add')
         inputter.exec_()
         self.confighandler.addGroup(str(inputter.text.text()))
-        self.show_groups()
+        self.show_groups_in_combo()
+
+    def on_remove_highlighted_device_clicked(self):
+        item = self.mainWidget.listWidget_2.takeItem(self.mainWidget.listWidget_2.currentRow())
+        item = None
+
+    def on_clear_list_clicked(self):
+        while(self.mainWidget.listWidget_2.count()>0):
+            self.mainWidget.listWidget_2.takeItem(0)
 
     def on_edit_group_clicked(self):
         inputter = InputDialog2(self, 
-                               title="Change name of the group", 
-                               label="Old name of the group", 
-                               text="", 
-                               label2="New name of the group",
-                               text2="",
-                               buttonText='Edit!')
+                                title="Change name of the group", 
+                                label="Old name of the group", 
+                                text="", 
+                                label2="New name of the group",
+                                text2="",
+                                buttonText='Edit!')
         inputter.exec_()
         old_name = str(inputter.text.text())
         new_name = str(inputter.text2.text())
         if old_name != '' and new_name != '':
             self.confighandler.editGroupName(old_name=old_name, new_name=new_name)
-        self.show_groups()
+        self.show_groups_in_combo()
 
     def on_add_device_clicked(self):
         current_item = self.mainWidget.listWidget.currentItem()
-        if current_item:
+        all_items = []
+        for index in xrange(self.mainWidget.listWidget_2.count()):
+            all_items.append(self.mainWidget.listWidget_2.item(index).text())
+
+
+        print all_items
+        if current_item and current_item.text() not in all_items:
             self.mainWidget.listWidget_2.addItem(QtCore.QString(current_item.text()))
 
     def on_add_group_clicked(self):
@@ -82,7 +101,7 @@ class Step3Widget(QtGui.QWidget):
         
         device_list = [str(d.text()) for d in device_list]
 
-        print device_list, group_name
+        #print device_list, group_name
 
         if group_name == '' or (not device_list):
             ret = QtGui.QMessageBox.warning(self,
