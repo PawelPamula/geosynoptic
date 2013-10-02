@@ -76,17 +76,21 @@ class ConfigFileHandler(object):
         self._saveConfigToFile()
 
     def addDevice(self, device_name, group_name):
+        """
+        Returns True if adding device was successfull
+        """
         self.addGroup(group_name=group_name)
         element = self.root.xpath("//groups/group[@name='%s']" % group_name)
 
         for dev in element[0]:
             if dev.text == device_name:
-                break
+                return False
         else:
             newDevice = etree.Element("device")
             newDevice.text = device_name
             element[0].insert(-1, newDevice)
         self._saveConfigToFile()
+        return True
 
     def groupExists(self, group_name):
         element = self.root.xpath("//groups/group[@name='%s']" % group_name)

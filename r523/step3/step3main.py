@@ -30,7 +30,7 @@ class Step3Widget(QtGui.QWidget):
 
         #Signals
         self.connect(self.mainWidget.pushButton, QtCore.SIGNAL('clicked()'), self.on_add_device_clicked)
-        self.connect(self.mainWidget.pushButton_2, QtCore.SIGNAL('clicked()'), self.on_add_group_clicked)
+        self.connect(self.mainWidget.pushButton_2, QtCore.SIGNAL('clicked()'), self.on_add_devices_clicked)
         self.connect(self.mainWidget.pushButton_4, QtCore.SIGNAL('clicked()'), self.on_remove_highlighted_device_clicked)
         self.connect(self.mainWidget.pushButton_3, QtCore.SIGNAL('clicked()'), self.on_add_group)
         self.connect(self.mainWidget.pushButton_5, QtCore.SIGNAL('clicked()'), self.on_clear_list_clicked)
@@ -93,7 +93,7 @@ class Step3Widget(QtGui.QWidget):
         if current_item and current_item.text() not in all_items:
             self.mainWidget.listWidget_2.addItem(QtCore.QString(current_item.text()))
 
-    def on_add_group_clicked(self):
+    def on_add_devices_clicked(self):
         device_list = []
         group_name = str(self.mainWidget.comboBox.currentText())
         while(self.mainWidget.listWidget_2.count()>0):
@@ -110,8 +110,17 @@ class Step3Widget(QtGui.QWidget):
                                             QtGui.QMessageBox.Ok)
 
         else:
-            for d in device_list:
-                self.confighandler.addDevice(device_name=d, group_name=group_name)
+            flag = True
+            for d in device_list:    
+                result = self.confighandler.addDevice(device_name=d, group_name=group_name)
+                if not result:
+                    flag = result
+
+            if not flag:
+                ret = QtGui.QMessageBox.information(self,
+                                                    "Info",
+                                                    '''There were repeated devices in the group''',
+                                                    QtGui.QMessageBox.Ok)
 
 
 class InputDialog(QtGui.QDialog):
