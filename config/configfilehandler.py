@@ -58,19 +58,22 @@ class ConfigFileHandler(object):
             doc.write(configFile, pretty_print=True)
         configFile.close()
 
-    def editGroupName(self, old_name, new_name):
+    def editGroupName(self, old_name, new_name, new_path):
         element = self.root.xpath("//groups/group[@name='%s']" % old_name)
         if element:
             print  element[0].attrib['name']
             element[0].attrib['name'] = new_name
+            if new_path != '':
+                element[0].attrib['icon_path'] = new_path
             self._saveConfigToFile()
         else:
             'NOT FOUND'
 
-    def addGroup(self, group_name):
+    def addGroup(self, group_name, icon_path):
         newGroup = etree.Element("group")
         newGroup.attrib['name'] = group_name
-        
+        newGroup.attrib['icon_path'] = icon_path
+
         if not self.root.xpath("//groups/group[@name='%s']" % group_name):
             self.root.xpath('//groups')[0].insert(0, newGroup)
         self._saveConfigToFile()
@@ -101,6 +104,11 @@ class ConfigFileHandler(object):
     def getGroups(self):
         groups = self.root.xpath("//groups/group")
         return [g.attrib['name'] for g in groups]
+
+    def getGroupsWithIcons(self):
+        groups = self.root.xpath("//groups/group")
+        return [(g.attrib['name'], g.attrib['icon_path']) for g in groups]
+
 
 if __name__ == '__main__':
     c = ConfigFileHandler()

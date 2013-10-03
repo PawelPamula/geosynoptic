@@ -103,16 +103,13 @@ class Ui_Step3(QtGui.QWidget):
                                             background: blue;
                                          }
                                          QListWidget:item:selected:!active {
-                                            background: gray;
+                                            background: white;
                                          }
                                          QListWidget:item:selected:disabled {
-                                            background: gray;
+                                            background: white;
                                          }
                                          QListWidget:item:selected:!disabled {
                                             background: blue;
-                                         }
-                                         QListWidget {
-                                            background: lightgray;
                                          }
                                        """
                                      )

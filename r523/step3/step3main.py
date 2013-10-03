@@ -27,6 +27,7 @@ class Step3Widget(QtGui.QWidget):
         self.mainWidget.pushButton_8.setEnabled(False)
         self.show_devices_in_list_view()
         self.show_groups_in_combo()
+        self.show_groups_with_icons()
 
         #Signals
         self.connect(self.mainWidget.pushButton, QtCore.SIGNAL('clicked()'), self.on_add_device_clicked)
@@ -49,6 +50,16 @@ class Step3Widget(QtGui.QWidget):
         groups = [QtCore.QString(s) for s in groups]
         self.mainWidget.comboBox.addItems(groups)
 
+    def show_groups_with_icons(self):
+        self.mainWidget.listWidget_3.clear()
+        groups = self.confighandler.getGroupsWithIcons()
+
+        for i, j in groups:
+            item = QtGui.QListWidgetItem(i)
+            item.setIcon(QtGui.QIcon(j))
+            self.mainWidget.listWidget_3.addItem(item)
+       #print groups
+
     def on_add_group(self):
         inputter = InputDialog(self, 
                                title="Add Group of Devices", 
@@ -56,8 +67,9 @@ class Step3Widget(QtGui.QWidget):
                                text="", 
                                buttonText='Add')
         inputter.exec_()
-        self.confighandler.addGroup(str(inputter.text.text()))
+        self.confighandler.addGroup(str(inputter.text.text()), str(inputter.icon_path))
         self.show_groups_in_combo()
+        self.show_groups_with_icons()
 
     def on_remove_highlighted_device_clicked(self):
         item = self.mainWidget.listWidget_2.takeItem(self.mainWidget.listWidget_2.currentRow())
@@ -78,9 +90,11 @@ class Step3Widget(QtGui.QWidget):
         inputter.exec_()
         old_name = str(inputter.text.text())
         new_name = str(inputter.text2.text())
+        new_path = str(inputter.icon_path)
         if old_name != '' and new_name != '':
-            self.confighandler.editGroupName(old_name=old_name, new_name=new_name)
+            self.confighandler.editGroupName(old_name=old_name, new_name=new_name, new_path=new_path)
         self.show_groups_in_combo()
+        self.show_groups_with_icons()
 
     def on_add_device_clicked(self):
         current_item = self.mainWidget.listWidget.currentItem()
@@ -128,24 +142,36 @@ class InputDialog(QtGui.QDialog):
     this is for when you need to get some user input text
     '''
     def __init__(self, parent=None, title='', label='', text='', buttonText=''):
-
         QtGui.QWidget.__init__(self, parent)
+
+        self.icon_path = ''
 
         #--Layout Stuff---------------------------#
         mainLayout = QtGui.QVBoxLayout()
 
-        self.layout = QtGui.QHBoxLayout()
+        self.layout = QtGui.QVBoxLayout()
         self.label = QtGui.QLabel()
         self.label.setText(label)
         self.layout.addWidget(self.label)
+
+        self.icon_label = QtGui.QLabel()
+        self.icon_label.setText('Icon')
+
+        self.browse_button = QtGui.QPushButton('Browse')        
+        self.connect(self.browse_button, QtCore.SIGNAL("clicked()"), self.on_browse_clicked)
 
         self.text = QtGui.QLineEdit(text)
         self.layout.addWidget(self.text)
 
         mainLayout.addLayout(self.layout)
 
-        self.layout = QtGui.QHBoxLayout()
+        self.layout = QtGui.QVBoxLayout()
+
+        self.layout.addWidget(self.icon_label)
+        self.layout.addWidget(self.browse_button)
+
         self.button = QtGui.QPushButton(buttonText) #string or icon
+        self.button.setEnabled(False)
         self.connect(self.button, QtCore.SIGNAL("clicked()"), self.close)
         self.layout.addWidget(self.button)
 
@@ -155,11 +181,16 @@ class InputDialog(QtGui.QDialog):
         self.resize(300, 100)
         self.setWindowTitle(title)
 
+    def on_browse_clicked(self):
+        self.icon_path = fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', '/home')
+        if self.icon_path != '':
+            self.button.setEnabled(True)
 
 class InputDialog2(InputDialog):
     def __init__(self, parent=None, title='', label='', text='', label2='', text2='', buttonText=''):
-
         QtGui.QWidget.__init__(self, parent)
+
+        self.icon_path = ''
 
         #--Layout Stuff---------------------------#
         mainLayout = QtGui.QVBoxLayout()
@@ -168,6 +199,12 @@ class InputDialog2(InputDialog):
         self.label = QtGui.QLabel()
         self.label.setText(label)
         self.layout.addWidget(self.label)
+
+        self.icon_label = QtGui.QLabel()
+        self.icon_label.setText('Icon')
+
+        self.browse_button = QtGui.QPushButton('Browse')        
+        self.connect(self.browse_button, QtCore.SIGNAL("clicked()"), self.on_browse_clicked)
 
         self.text = QtGui.QLineEdit(text)
         self.layout.addWidget(self.text)
@@ -185,6 +222,7 @@ class InputDialog2(InputDialog):
         self.button = QtGui.QPushButton(buttonText) #string or icon
         self.connect(self.button, QtCore.SIGNAL("clicked()"), self.close)
         self.layout.addWidget(self.button)
+        self.layout.addWidget(self.browse_button)
 
         mainLayout.addLayout(self.layout)
         self.setLayout(mainLayout)
@@ -192,6 +230,9 @@ class InputDialog2(InputDialog):
         self.resize(300, 150)
         self.setWindowTitle(title)
 
+
+    def on_browse_clicked(self):
+        self.icon_path = fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', '/home')
 
 def main():
     app = QtGui.QApplication(sys.argv)
