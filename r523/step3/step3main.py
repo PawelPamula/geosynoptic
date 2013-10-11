@@ -40,17 +40,26 @@ class Step3Widget(QtGui.QWidget):
         self.show()
 
     def show_devices_in_list_view(self):
+        """
+        Prints available devices in listWidget
+        """
         output = self.gtango.get_device_list('*/*/*')
         qStringOutput = [QtCore.QString(i) for i in output]
         self.mainWidget.listWidget.addItems(qStringOutput)
 
     def show_groups_in_combo(self):
+        """
+        Retrieves available groups from config.xml
+        """
         self.mainWidget.comboBox.clear()
         groups = self.confighandler.getGroups()
         groups = [QtCore.QString(s) for s in groups]
         self.mainWidget.comboBox.addItems(groups)
 
     def show_groups_with_icons(self):
+        """
+        Displays availble groups with corresponding icon
+        """
         self.mainWidget.listWidget_3.clear()
         groups = self.confighandler.getGroupsWithIcons()
 
