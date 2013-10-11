@@ -7,37 +7,44 @@ from config.configfilehandler import ConfigFileHandler
 from geosynoptictango import GeosynopticTango
 from step3 import Ui_Step3
 from PyQt4 import QtCore, QtGui
-
+from r492.add_proper import check_taurus_installation
 
 class Step3Widget(QtGui.QWidget):
     def __init__(self, parent):
         super(Step3Widget, self).__init__()
 
-        self.confighandler = ConfigFileHandler(configFilePath='config.xml')
-        self.gtango = GeosynopticTango()
+        if not check_taurus_installation():
+            ret = QtGui.QMessageBox.warning(self,
+                                            "Warning",
+                                            '''Taurus not installed''',
+                                            QtGui.QMessageBox.Ok)
+        else:
 
-        self.resize(640, 480)
-        self.layout = QtGui.QHBoxLayout()
-        self.mainWidget = Ui_Step3(self)
-        self.layout.addWidget(self.mainWidget)
-        self.setLayout(self.layout)
+            self.confighandler = ConfigFileHandler(configFilePath='config.xml')
+            self.gtango = GeosynopticTango()
 
-        self.mainWidget.listWidget_3.setEnabled(False)
-        self.mainWidget.pushButton_7.setEnabled(False)
-        self.mainWidget.pushButton_8.setEnabled(False)
-        self.show_devices_in_list_view()
-        self.show_groups_in_combo()
-        self.show_groups_with_icons()
+            self.resize(640, 480)
+            self.layout = QtGui.QHBoxLayout()
+            self.mainWidget = Ui_Step3(self)
+            self.layout.addWidget(self.mainWidget)
+            self.setLayout(self.layout)
 
-        #Signals
-        self.connect(self.mainWidget.pushButton, QtCore.SIGNAL('clicked()'), self.on_add_device_clicked)
-        self.connect(self.mainWidget.pushButton_2, QtCore.SIGNAL('clicked()'), self.on_add_devices_clicked)
-        self.connect(self.mainWidget.pushButton_4, QtCore.SIGNAL('clicked()'), self.on_remove_highlighted_device_clicked)
-        self.connect(self.mainWidget.pushButton_3, QtCore.SIGNAL('clicked()'), self.on_add_group)
-        self.connect(self.mainWidget.pushButton_5, QtCore.SIGNAL('clicked()'), self.on_clear_list_clicked)
-        self.connect(self.mainWidget.pushButton_6, QtCore.SIGNAL('clicked()'), self.on_edit_group_clicked)
+            self.mainWidget.listWidget_3.setEnabled(False)
+            self.mainWidget.pushButton_7.setEnabled(False)
+            self.mainWidget.pushButton_8.setEnabled(False)
+            self.show_devices_in_list_view()
+            self.show_groups_in_combo()
+            self.show_groups_with_icons()
 
-        self.show()
+            #Signals
+            self.connect(self.mainWidget.pushButton, QtCore.SIGNAL('clicked()'), self.on_add_device_clicked)
+            self.connect(self.mainWidget.pushButton_2, QtCore.SIGNAL('clicked()'), self.on_add_devices_clicked)
+            self.connect(self.mainWidget.pushButton_4, QtCore.SIGNAL('clicked()'), self.on_remove_highlighted_device_clicked)
+            self.connect(self.mainWidget.pushButton_3, QtCore.SIGNAL('clicked()'), self.on_add_group)
+            self.connect(self.mainWidget.pushButton_5, QtCore.SIGNAL('clicked()'), self.on_clear_list_clicked)
+            self.connect(self.mainWidget.pushButton_6, QtCore.SIGNAL('clicked()'), self.on_edit_group_clicked)
+
+            self.show()
 
     def show_devices_in_list_view(self):
         """
